@@ -215,5 +215,72 @@ def ex8():
             notes.pop(j)
 
     return notes
+def ex9(attempts):
+    '''
+takes in attempts, which is list containing student's attempted True/False Questions. and returns a string of the correct answers.
+The correct answers made in a such way, so that the average score increases.
+Note: The code works as required, but i think the loops are redundant, there's probably a better way to do this, for now at least it works.
+'''
+    temp = ''
+    l = []
+    correct = ''
+    t = 0
+    f = 0
+    for i in range(len(attempts)):
+        attempts[i] = list(attempts[i])
+    for i in range(len(attempts[0])):
+        for j in range(len(attempts)):
+            temp+=attempts[j][i]
+        for i in temp:
+            
+            if i == 'F':
+                f+=1
+            else:
+                t+=1
+        
+        if f>t:
+            correct+='F'
+        elif f<t:
+            correct+='T'
+        t = 0
+        f = 0
+        temp = ''
+        
+    
+        
+    return correct
 
+    
+    
+
+
+
+
+# to test ex9() :
+attempts=['TTFTTFFTFT','FFFTTFFTFT','TTFFFFFTFT','TTFFFFFTFT','TTFTTTTTFT'
+,'TTTTTTTTTT']
+
+print(ex9(attempts))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
 
