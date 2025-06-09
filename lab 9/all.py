@@ -106,15 +106,21 @@ def ex2():
         
 
 import random
-def ex3():
+def ex3(low = 65): # will use low argument to control whether i want letters from a or A, usefull for exercise 10
     '''
-    Just prints a random alphabet letter using ascii and chr() function
+    Just prints/return a random alphabet letter using ascii and chr() function
     '''
-    num = random.randint(65,122)
-    while not(90>num>97):
-        num= random.randint(65,122)
-    print(chr(num))
-
+    
+    num = random.randint(low,122)
+    while num>90 and num<97:
+        num= random.randint(low,122)
+    #print(chr(num))
+    return chr(num)
+# uncomment the following to check ex3()
+'''
+for i in range(10):
+    print(ex3())
+'''
 def ex4(a,t):
     '''takes two strings, return the number of matching characters
     for example ex4("TTFT","TTTT") will return 3'''
@@ -125,6 +131,8 @@ def ex4(a,t):
         if a[i] == t[i]:
             counter+=1
     return counter
+#ex4("TTFT","TTTT") # to test ex4
+
 def ex5(menu):
     '''takes in dictionary that contains menu similar to menuDict in ex1, 
     return the most expensive dish and it's price'''
@@ -139,7 +147,7 @@ def ex5(menu):
         for i in items: 
             print(i) 
         print(f"they cost {max_price} each")
-
+#ex5(menuDict) # to test ex5
 def grade2gpa(grade):
     if grade>=90:
         return 4
@@ -168,7 +176,7 @@ def ex6(g = grades.copy()): # = grades.copy() in case no arguments is passed, th
         earned+= grade2gpa(j)* i[1] # e.g ('infs',3): grade2gpa(score) will become 3*score and added to earned
     gpa = earned/total_credits
     return gpa
-
+#ex6() #to test ex6
 
 def ex7():
     '''asks how many times to roll the dice, rolls dice using random module, and 
@@ -189,6 +197,8 @@ def ex7():
     freq = {1:rolls.count(1),2:rolls.count(2),3:rolls.count(3),4:rolls.count(4),5:rolls.count(5),6:rolls.count(6)}
     print(f"Output of dice rolls: {rolls}")
     print(f"Frequency of dice rolls: {freq}")
+
+#ex7() #to test ex7
 
 def ex8():
     '''Takes in amount of money amount and returns a dictionary with keys as
@@ -215,6 +225,8 @@ def ex8():
             notes.pop(j)
 
     return notes
+
+#ex8() # to test ex8
 def ex9(attempts):
     '''
 takes in attempts, which is list containing student's attempted True/False Questions. and returns a string of the correct answers.
@@ -262,13 +274,55 @@ Note: The code works as required, but i think the loops are redundant, there's p
 
 
 
-# to test ex9() :
-attempts=['TTFTTFFTFT','FFFTTFFTFT','TTFFFFFTFT','TTFFFFFTFT','TTFTTTTTFT'
+# to test ex9() uncomment the following:
+'''attempts=['TTFTTFFTFT','FFFTTFFTFT','TTFFFFFTFT','TTFFFFFTFT','TTFTTTTTFT'
 ,'TTTTTTTTTT']
 
 print(ex9(attempts))
+'''
 
 
+def ex10():
+    """
+    asks the user how many letters they want at random. then prints a dictionary containing the letters as keys
+    and their frequency as their values to show the number of times that letter was chosen at random.
+    
+    """
+    num = input("How many letters do you want to draw at random? ")
+    while not(num.isnumeric() and int(num)>0):
+        print("Invalid, enter a positive number please. Try again.")
+        num = input("How many letters do you want to draw at random? ")
+    num = int(num)
+    freq = {}
+    letters = []
+    
+    for i in range(num):
+       letter = ex3(97) # passing 97 means, i want the letters from a not A bcuz ord(a) == 97
+       letters.append(letter)
+    letters.sort()
+    
+    for i in range(97,123):
+        while chr(i) in letters:
+            if chr(i) in freq.keys():
+                freq[chr(i)] +=1
+                letters.pop(letters.index(chr(i)))
+            else:
+                freq[chr(i)] = 1
+                letters.pop(letters.index(chr(i)))
+    print("Frequency of letters: ",freq)
+    # now dealing with modes
+    vals = list(freq.values()) # will store values as list
+    m = max(vals) # now we know the biggest value
+    modes = ''
+    for letter,frequency in freq.items():
+        if frequency == m:
+            modes+=f' {letter}'
+        
+
+    print("Most frequent letter(s):",modes)
+    
+
+#ex10() # to test exercise 10
 
 
 
