@@ -226,8 +226,9 @@ Note: The code works as required, but i think the loops are redundant, there's p
     correct = ''
     t = 0
     f = 0
-    for i in range(len(attempts)):
-        attempts[i] = list(attempts[i])
+    arranged_scores = []
+   # for i in range(len(attempts)): #didn't need this loop
+        #attempts[i] = list(attempts[i])
     for i in range(len(attempts[0])):
         for j in range(len(attempts)):
             temp+=attempts[j][i]
@@ -240,14 +241,19 @@ Note: The code works as required, but i think the loops are redundant, there's p
         
         if f>t:
             correct+='F'
+            
         elif f<t:
             correct+='T'
+            
         t = 0
         f = 0
         temp = ''
         
-    
-        
+    for attempt in attempts: # gonna reuse ex4(attempt, correct) function here
+        arranged_scores.append(ex4(attempt,correct))
+    print(f"Arranged 'correct' ansers: {correct}")
+    print(f"Arranged scores: {arranged_scores}")
+    print(f"Best average: {sum(arranged_scores)/len(arranged_scores)}")
     return correct
 
     
