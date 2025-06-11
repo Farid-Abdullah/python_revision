@@ -1,6 +1,7 @@
 
 """
 week 11lab INFS1201
+Mostly about dictionaries
 """
 
 menuDict = {
